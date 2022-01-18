@@ -1,1 +1,1 @@
-A website leg shop website built with Express
+A web application shop built with Express
