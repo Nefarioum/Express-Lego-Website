@@ -1,5 +1,5 @@
 
-const express = require('express')
+import express from 'express';
 const app = express() 
 
 const config = {
@@ -11,13 +11,12 @@ const config = {
 app.use(express.static(config['__dirname'], { extensions: [config['extensions']] }));
 app.use(express.static(config['__dirnameOther'], { extensions: [config['extensions']] }));
 
-
-const index = require('./routes/index')
-const api = require('./routes/api') 
-const database = require('./database/databaseManager.js') 
+import index from './routes/index.js'
+import api from './routes/api.js'
+import * as database from './database/databaseManager.js'
 
 
 app.use('/', index)
 app.use('/api', api) 
 
-module.exports = app
+export default app

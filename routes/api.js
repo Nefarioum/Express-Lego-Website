@@ -1,4 +1,4 @@
-const express = require('express')
+import express from 'express';
 const router = express.Router()
 
 /*
@@ -15,4 +15,4 @@ router.get('/:resource/:id', (req, res) => {
 
 //router.get('/messages', asyncWrap(getMessages));
 
-module.exports = router
+export default router

@@ -1,6 +1,7 @@
-let app = require('../app');
-let debug = require('debug')('exp-test:server');
-let http = require('http');
+import app from '../app.js'
+import debug from 'debug'
+//let debug = require('debug')('exp-test:server');
+import http from 'http'
 
 const handlePort = (val) => {
   let port = parseInt(val, 10);

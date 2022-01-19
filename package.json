@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "server": false,
   "private": true,
+  "type": "module",
   "scripts": {
     "start": "node ./bin/www",
     "serve": "nodemon ./bin/www",
@@ -12,7 +13,7 @@
   },
   "dependencies": {
     "express": "^4.17.1",
-    "sqlite": "^4.0.23"
+    "better-sqlite3": "^7.4.6"
   },
   "devDependencies": {
     "nodemon": "^2.0.2",

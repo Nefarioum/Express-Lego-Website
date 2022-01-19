@@ -57,10 +57,8 @@ const handleLoadingCustomJS = () => {
         
     }
 
-
     handleLoadingComponents();
 };
-
 
 const handleLoadingComponents = () => {
     const CurrentComponents = ['Footer', 'NavBar'];
