@@ -14,6 +14,8 @@ app.use(express.static(config['__dirnameOther'], { extensions: [config['extensio
 
 const index = require('./routes/index')
 const api = require('./routes/api') 
+const database = require('./database/databaseManager.js') 
+
 
 app.use('/', index)
 app.use('/api', api) 

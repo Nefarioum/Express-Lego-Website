@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 router.get('/', (req, res) => {
-  res.sendFile('home.html', { root: "views/" } );
+  res.redirect('/home');
 })
 
 /*
@@ -18,7 +18,7 @@ router.get('/json', (req, res) => {
 }) */
 
 router.get('*', function(req, res){
-  if (res.req.client._httpMessage.req.originalUrl == '/js/pages/.js') return res.status(202)
+  if (res.req.client._httpMessage.req.originalUrl.includes('/js/pages/')) return res.status(202)
   res.sendFile('error404.html', { root: "views/" } );
 });
 
