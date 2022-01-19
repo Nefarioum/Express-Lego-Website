@@ -13,8 +13,7 @@ app.use(express.static(config['__dirnameOther'], { extensions: [config['extensio
 
 import index from './routes/index.js'
 import api from './routes/api.js'
-import * as database from './database/databaseManager.js'
-
+import * as DatabaseManager from './database/databaseManager.js'
 
 app.use('/', index)
 app.use('/api', api) 

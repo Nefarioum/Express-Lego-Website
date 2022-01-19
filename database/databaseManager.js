@@ -1,27 +1,53 @@
-import { createDummyData } from './databaseDummyData.js';
-import DatabaseHandler from 'better-sqlite3';
+import { initializeDBTable } from './databaseDummyData.js';
+import DB from 'sqlite3';
+class DatabaseHandler {
+    constructor() {
+        this.DatabaseConnection = null
 
-const initializeDB = async () => {
-    const Database = await new DatabaseHandler('database/db/lego-store.db');
+        this.init();
+    }
 
-    const ItemsTable = Database.prepare("SELECT count(*) FROM sqlite_master WHERE type='table' AND name ='lego_items';").get();
+    async init() {
+        const Database = await new DB.Database('database/db/lego-store.db', async (err) => {
+            if (err) {
+              return console.error(err.message);
+            }
+    
+            Database.get("SELECT count(*) FROM sqlite_master WHERE type='table'AND name ='lego_items';", [], async (err, row) => {
+                if (err) return console.error(err.message);
+        
+                if (!row['count(*)']) {
+                    await Database.close();
+                    return this.initTable();
+                } 
 
-    if (!ItemsTable['count(*)']) await createDBTable(Database);
+                console.log('Connected to the in-memory SQlite database.');
 
-    return Database;
-};
+                this.DatabaseConnection = Database;
+              });
+          });;
+    }
 
+    async query(sql, parameters) {
+        await this.DatabaseConnection.get(sql, parameters, async (err, row) => {
+            if (err) return console.error(err.message);
+            console.log(sql);
+            return row;
+        });
+    }
 
-const createDBTable = async (Database) => {
-    await Database.prepare("CREATE TABLE lego_items (unique_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, image TEXT, price INTEGER, stock INTEGER, slug TEXT, description TEXT, schema TEXT);").run();
-    await Database.prepare("CREATE UNIQUE INDEX idx_lego_items_id ON lego_items (unique_id);").run();
-    Database.pragma("synchronous = 1");
-    Database.pragma("journal_mode = wal");
+    
+    async initTable(sql, parameters) {
+        const Database = await new DB.Database('database/db/lego-store.db', async (err) => {
+            console.log('Connected to the in-memory SQlite database.');
 
-    createDummyData(Database)
-};
+        });;
 
+        this.DatabaseConnection = Database;
+        await initializeDBTable();
+    }
 
-const Database = initializeDB();
+}
 
-
+const DataHandler = new DatabaseHandler();
+export default DataHandler

@@ -1,9 +1,21 @@
-export const createDummyData = async (DatabaseManager) => {
-    await DatabaseManager.prepare("INSERT INTO `lego_items` (name, image, price, stock, slug, description, schema) VALUES (@name, @image, @price, @stock, @slug, @description, @schema);").run({name:'Lego Piece (Blue)', image: 'https://www.kindpng.com/picc/m/390-3908027_blue-lego-brick-transparent-hd-png-download.png', price: 5, stock:100, slug:'blue-brick-1', description:'A blue lego brick for all your lego needs!', schema:'brick'});
-    await DatabaseManager.prepare("INSERT INTO `lego_items` (name, image, price, stock, slug, description, schema) VALUES (@name, @image, @price, @stock, @slug, @description, @schema);").run({name:'Lego Piece (Red)', image: 'https://www.kindpng.com/picc/m/390-3908027_blue-lego-brick-transparent-hd-png-download.png', price: 5, stock:100, slug:'red-brick-1', description:'A red lego brick for all your lego needs!', schema:'brick'});
-    await DatabaseManager.prepare("INSERT INTO `lego_items` (name, image, price, stock, slug, description, schema) VALUES (@name, @image, @price, @stock, @slug, @description, @schema);").run({name:'Lego Piece (Yellow)', image: 'https://www.kindpng.com/picc/m/390-3908027_blue-lego-brick-transparent-hd-png-download.png', price: 5, stock:100, slug:'yellow-brick-1', description:'A yellow lego brick for all your lego needs!', schema:'brick'});
-    await DatabaseManager.prepare("INSERT INTO `lego_items` (name, image, price, stock, slug, description, schema) VALUES (@name, @image, @price, @stock, @slug, @description, @schema);").run({name:'Lego Piece (Green)', image: 'https://www.kindpng.com/picc/m/390-3908027_blue-lego-brick-transparent-hd-png-download.png', price: 5, stock:100, slug:'green-brick-1', description:'A green lego brick for all your lego needs!', schema:'brick'});
-    await DatabaseManager.prepare("INSERT INTO `lego_items` (name, image, price, stock, slug, description, schema) VALUES (@name, @image, @price, @stock, @slug, @description, @schema);").run({name:'Lego Piece (Orange)', image: 'https://www.kindpng.com/picc/m/390-3908027_blue-lego-brick-transparent-hd-png-download.png', price: 5, stock:100, slug:'orange-brick-1', description:'A orange lego brick for all your lego needs!', schema:'brick'});
-    await DatabaseManager.prepare("INSERT INTO `lego_items` (name, image, price, stock, slug, description, schema) VALUES (@name, @image, @price, @stock, @slug, @description, @schema);").run({name:'Lego Piece (Black)', image: 'https://www.kindpng.com/picc/m/390-3908027_blue-lego-brick-transparent-hd-png-download.png', price: 5, stock:100, slug:'black-brick-1', description:'A black lego brick for all your lego needs!', schema:'brick'});
-    await DatabaseManager.prepare("INSERT INTO `lego_items` (name, image, price, stock, slug, description, schema) VALUES (@name, @image, @price, @stock, @slug, @description, @schema);").run({name:'Lego Piece (Purple)', image: 'https://www.kindpng.com/picc/m/390-3908027_blue-lego-brick-transparent-hd-png-download.png', price: 5, stock:100, slug:'purple-brick-1', description:'A purple lego brick for all your lego needs!', schema:'brick'});
+import DatabaseHandler from './databaseManager.js'
+
+export const initializeDBTable = async () => {
+    DatabaseHandler.DatabaseConnection.serialize(() => {
+        DatabaseHandler.query("CREATE TABLE lego_items (unique_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, image TEXT, price INTEGER, stock INTEGER, slug TEXT, description TEXT, schema TEXT);");
+        DatabaseHandler.query("CREATE UNIQUE INDEX idx_lego_items_id ON lego_items (unique_id);");
+    });
+
+    createDummyData()
+};
+
+export const createDummyData = async () => {
+    DatabaseHandler.DatabaseConnection.serialize(() => {
+        DatabaseHandler.query("INSERT INTO `lego_items` (name, image, price, stock, slug, description, schema) VALUES (?, ?, ?, ?, ?, ?, ?);", ['Lego Piece (Blue)', 'https://www.kindpng.com/picc/m/390-3908027_blue-lego-brick-transparent-hd-png-download.png', 5, 100, 'blue-brick-1', 'A blue lego brick for all your lego needs!', 'brick'])
+        DatabaseHandler.query("INSERT INTO `lego_items` (name, image, price, stock, slug, description, schema) VALUES (?, ?, ?, ?, ?, ?, ?);", ['Lego Piece (Yellow)', 'https://www.kindpng.com/picc/m/390-3908027_blue-lego-brick-transparent-hd-png-download.png', 5, 100, 'yellow-brick-1', 'A yellow lego brick for all your lego needs!', 'brick'])
+        DatabaseHandler.query("INSERT INTO `lego_items` (name, image, price, stock, slug, description, schema) VALUES (?, ?, ?, ?, ?, ?, ?);", ['Lego Piece (Green)', 'https://www.kindpng.com/picc/m/390-3908027_blue-lego-brick-transparent-hd-png-download.png', 5, 100, 'green-brick-1', 'A green lego brick for all your lego needs!', 'brick'])
+        DatabaseHandler.query("INSERT INTO `lego_items` (name, image, price, stock, slug, description, schema) VALUES (?, ?, ?, ?, ?, ?, ?);", ['Lego Piece (Orange)', 'https://www.kindpng.com/picc/m/390-3908027_blue-lego-brick-transparent-hd-png-download.png', 5, 100, 'orange-brick-1', 'A orange lego brick for all your lego needs!', 'brick'])
+        DatabaseHandler.query("INSERT INTO `lego_items` (name, image, price, stock, slug, description, schema) VALUES (?, ?, ?, ?, ?, ?, ?);", ['Lego Piece (Black)', 'https://www.kindpng.com/picc/m/390-3908027_blue-lego-brick-transparent-hd-png-download.png', 5, 100, 'black-brick-1', 'A black lego brick for all your lego needs!', 'brick'])
+        DatabaseHandler.query("INSERT INTO `lego_items` (name, image, price, stock, slug, description, schema) VALUES (?, ?, ?, ?, ?, ?, ?);", ['Lego Piece (Purple)', 'https://www.kindpng.com/picc/m/390-3908027_blue-lego-brick-transparent-hd-png-download.png', 5, 100, 'pruple-brick-1', 'A purple lego brick for all your lego needs!', 'brick'])
+    });
 };

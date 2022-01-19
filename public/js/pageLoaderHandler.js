@@ -40,7 +40,7 @@ const handleLoadingCustomJS = () => {
         xhr.open('HEAD', scriptPath, true);
         xhr.send();
         
-        xhr.onreadystatechange = function (oEvent) {
+        xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
                 if (xhr.status == "202") {
                     return false;
