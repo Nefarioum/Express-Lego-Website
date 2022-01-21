@@ -10,7 +10,7 @@ class DatabaseHandler {
     async init() {
         const DatabaseRow = await this.query("SELECT count(*) FROM sqlite_master WHERE type='table'AND name ='lego_items';", []);
 
-        if (!DatabaseRow['count(*)']) {
+        if (!DatabaseRow[0]['count(*)']) {
             return this.initTable();
         };
 
@@ -47,7 +47,7 @@ class DatabaseHandler {
         this.DatabaseConnection = await this.connection();
 
         return new Promise(resolve => {
-            this.DatabaseConnection.get(sql, parameters, (err, row) => {
+            this.DatabaseConnection.all(sql, parameters, (err, row) => {
                 if (err) console.error(`${sql}- ${err.message}`);
 
                 console.log('Single Query has executed successfully.')
@@ -82,7 +82,7 @@ class DatabaseHandler {
             console.log('Multiple Queries have all executed successfully.')
         });
     }
-    
+
     async initTable() {       
         await initializeDBTable();
     }
