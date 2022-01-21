@@ -12,7 +12,8 @@ const loadStoreItems = async () => {
                 <div class="image"
                     style="background-image: url(${e.Image});">
                 </div>
-                <p class="item_description">${e.Name}</p>
+                <h2 class="item_title">${e.Name}</h2>
+                <p class="item_description">${e.Description}</p>
             </a>`)
         });
     }
