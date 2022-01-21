@@ -16,7 +16,6 @@
     "sqlite3": "^5.0.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.2",
-    "rimraf": "^2.6.2"
+    "nodemon": "^2.0.2"
   }
 }

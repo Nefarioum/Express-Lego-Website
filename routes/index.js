@@ -1,8 +1,16 @@
 import express from 'express';
 const router = express.Router()
 
+import { ItemController } from '../controllers/index.js';
+
 router.get('/', (req, res) => {
+  console.log('hi');
   res.redirect('/home');
+})
+
+router.get('/store', (req, res) => {
+  const ItemControl = new ItemController();
+  //res.json('/home');
 })
 
 /*

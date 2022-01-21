@@ -2,7 +2,7 @@ import { initializeDBTable } from './databaseDummyData.js';
 import DB from 'sqlite3';
 class DatabaseHandler {
     constructor() {
-        this.DatabaseConnection = null
+        this.DatabaseConnection = null;
 
         this.init();
     }
@@ -13,6 +13,8 @@ class DatabaseHandler {
         if (!DatabaseRow['count(*)']) {
             return this.initTable();
         };
+
+        console.log('Initialization Complete');
     }
 
     async connection() {
@@ -47,9 +49,10 @@ class DatabaseHandler {
         return new Promise(resolve => {
             this.DatabaseConnection.get(sql, parameters, (err, row) => {
                 if (err) console.error(`${sql}- ${err.message}`);
-                this.close();
 
                 console.log('Single Query has executed successfully.')
+
+                this.close();
 
                 resolve(row);
             });
