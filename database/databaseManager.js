@@ -3,7 +3,6 @@ import DB from 'sqlite3';
 class DatabaseHandler {
     constructor() {
         this.DatabaseConnection = null
-        this.Database = null
 
         this.init();
     }
