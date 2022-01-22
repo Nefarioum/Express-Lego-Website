@@ -23,9 +23,8 @@ const handlePageTitle = (pageTitle = null) => {
 
 const handleLoadingCSS = () => {
     let cssLinks = `
-        <link rel="stylesheet" href="css/app.css" />
+        <link rel="stylesheet" href="/css/app.css" />
         `
-
     document.querySelector('#loadWebsiteCSS').insertAdjacentHTML('beforeend', cssLinks);
 };
 
@@ -33,7 +32,7 @@ const handleLoadingCustomJS = () => {
     const url = window.location.pathname;
     const pageTitleUncleansed = url.substring(url.lastIndexOf('/')+1);
 
-    const scriptPath = 'js/pages/'+ pageTitleUncleansed + '.js';
+    const scriptPath = '/js/pages/'+ pageTitleUncleansed + '.js';
 
     try {
         let xhr = new XMLHttpRequest();
