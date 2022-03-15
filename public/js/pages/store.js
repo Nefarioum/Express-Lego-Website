@@ -8,7 +8,7 @@ const loadStoreItems = async () => {
         
         StoreItems.forEach(e => {
             document.querySelector(`#${e.Schema}-section`).insertAdjacentHTML('afterbegin',
-            `<a class="item" href="/store/${e.Slug}">
+            `<a class="item" href="/item#${e.ID}">
                 <div class="image"
                     style="background-image: url(${e.Image});">
                 </div>

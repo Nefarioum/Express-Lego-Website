@@ -13,20 +13,15 @@ const handleAsyncLoading = (f) => {
 router.get('/store/', (req, res) => {  
   const ItemHandler = new ItemController();
 
-  (handleAsyncLoading(ItemHandler.get(res)));
+  (handleAsyncLoading(ItemHandler.getAll(res)));
 })
 
-/*
-router.get('/:resource/:id', (req, res) => {
-  res.json({
-    confirmation: 'success',
-    resource: req.params.resource,
-    id: req.params.id,
-    query: req.query 
-  })
-}) */
 
+router.get('/store/:id', (req, res) => {
+  const ItemHandler = new ItemController();
 
+  (handleAsyncLoading(ItemHandler.get(res, req.params.id)));
+}) 
 
 //router.get('/messages', asyncWrap(getMessages));
 
