@@ -7,15 +7,20 @@ class ItemController {
     async get(res, unique_id) {
         const GrabID = await DatabaseHandler.query("SELECT * FROM lego_items WHERE unique_id=?", [unique_id]);
         let allItemsArray = [];
-        new Promise(resolve => {
-            const Brick = new Item(GrabID[0].unique_id, GrabID[0].name, GrabID[0].image, GrabID[0].price, GrabID[0].stock, GrabID[0].slug, GrabID[0].description, GrabID[0].schema)
 
-            allItemsArray.push(Brick.returnAsJson());
+        if (GrabID.length > 0) {
+            new Promise(resolve => {
+                const Brick = new Item(GrabID[0].unique_id, GrabID[0].name, GrabID[0].image, GrabID[0].price, GrabID[0].stock, GrabID[0].slug, GrabID[0].description, GrabID[0].schema)
 
-            resolve();
-        }).then(() => {
-            return res.json(allItemsArray)
-        })
+                allItemsArray.push(Brick.returnAsJson());
+
+                resolve();
+            }).then(() => {
+                return res.json(allItemsArray)
+            })
+        } else {
+            return res.json([])
+        }
     }
 
     async getAll(res) {
