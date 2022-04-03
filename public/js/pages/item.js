@@ -2,6 +2,16 @@ const getItemID = () => {
     return window.location.hash.substring(1);
 }
 
+const addItemToCart = async () => {
+    const response = await fetch(`api/store/cart/${getItemID()}/1/1`);
+
+    if (response.ok) {
+        CartResponse = await response.json();
+
+        console.dir(CartResponse);
+    }
+}
+
 const loadStoreItems = async () => {
     const response = await fetch(`api/store/${getItemID()}`);
     let StoreItems;
@@ -19,10 +29,16 @@ const loadStoreItems = async () => {
              </div>
     
             `)
+
+            let AddToCartButton = document.getElementById("add-to-cart");
+
+            AddToCartButton.addEventListener('click', () => addItemToCart(), false);
+
         } else {
             window.location.href = window.location.href.replace(`item#${getItemID()}`, '404-not-found');
         }
     } 
+
 }
 
 loadStoreItems()

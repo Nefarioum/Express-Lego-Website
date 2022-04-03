@@ -2,22 +2,39 @@
 <html lang="en">
 
 <head id="loadWebsiteHeadings">
-    <script src="js/pageLoaderHandler.js"></script>
-    <script> handlePageTitle() </script>
+  <script src="js/pageLoaderHandler.js"></script>
+  <script>
+    handlePageTitle()
+  </script>
 </head>
 
-<body id="loadWebsiteCSS">
-    <nav-bar></nav-bar>
-    
-      <main>
-        <h1>Checkout</h1>
+<body id="loadWebsiteCSS" style="overflow-y: hidden; background-color: hsl(230, 43%, 97%);">
+  <nav-bar></nav-bar>
+  <main style="background-color: hsl(230, 43%, 97%);" class="main2">
+    <div class="Cart-Body">
+      <div class="CartContainer">
+        <div class="Header-cart">
+          <h3 class="Heading-cart" id="cart-header">Your shopping cart is empty</h3>
+          <h5 class="Action-cart hidden" id="remove-all-button" hidden>Remove all</h5>
+        </div>
+        <div id="cart-items">
 
-      </main>
+        </div>
 
-    <script>
-        handleLoadingCSS()
-        handleLoadingCustomJS()
-    </script>
+        <div class="checkout-cart" id="checkout-cart">
+          <div class="total-cart hidden" id="total-cart" hidden>
+
+          </div>
+          <button class="button-cart hidden" id="checkout-button" hidden>Checkout</button>
+        </div>
+      </div>
+  </main>
+  </div>
+
+  <script>
+    handleLoadingCSS()
+    handleLoadingCustomJS()
+  </script>
 
 </body>
 
